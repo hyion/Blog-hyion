@@ -13,21 +13,21 @@
 3. ui 库: [element-plus](https://element-plus.gitee.io/#/zh-CN/component/installation)
 4. [Vite](https://github.com/vitejs/vite)
 
-### 安装依赖
+#### 安装依赖
 
 ```
 yarn install
 npm install
 ```
 
-### 开发模式
+#### 开发模式
 
 ```
-yarn serve
-npm run serve
+yarn dev
+npm run dev
 ```
 
-### 生产环境
+#### 生产环境
 
 ```
 yarn build
