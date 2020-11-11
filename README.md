@@ -1,20 +1,35 @@
 # Hyion
 
-一个基于Vue3.0 + Typescript + Axios + Sass + element的个人博客
+>一个基于Vue3.0 + Typescript + Vite + Axios + Sass + element的个人博客
 
-## Build Setup
+### 项目基础代码架构说明
 
-```bash
-# install dependencies
-$ yarn install
+- 如果对你有帮助的话，欢迎star
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+#### 主要用到的库
 
-# build for production and launch server
-$ yarn build
-$ yarn dev
+1. vue 全家桶 [Vue3](https://vue3js.cn/docs/zh/guide/introduction.html) + [vue-router](https://github.com/vuejs/vue-router-next) + [Vuex](https://github.com/vuejs/vuex/tree/4.0/) + Typescript
+2. http 请求: [axios](https://github.com/axios/axios)
+3. ui 库: [element-plus](https://element-plus.gitee.io/#/zh-CN/component/installation)
+4. [Vite](https://github.com/vitejs/vite)
 
-# generate static project
-$ yarn generate
+### 安装依赖
+
+```
+yarn install
+npm install
+```
+
+### 开发模式
+
+```
+yarn serve
+npm run serve
+```
+
+### 生产环境
+
+```
+yarn build
+npm run build
 ```
