@@ -1,8 +1,8 @@
 <template>
   <section class="content-wrap">
     <div class="article f-flex align-center fadeInUp"
-      v-for="item in datas"
-      :class="`wow${item.id}`"
+      v-for="(item, index) in datas"
+      :class="`wow${index}`"
       :key="item.id">
       <div class="img-outer f-flex align-center justify-center" @click="toDetail(item.id)">
         <img v-if="item.image" :src="item.image.url" :alt="item.image.name" />
@@ -34,28 +34,41 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { articleList } from '/@/api/articles'
-import { onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+// import { WOW } from 'wowjs'
+import { useRouter } from 'vue-router'
+import { IListState } from './settings'
 
-export default {
+export default defineComponent({
   setup() {
-    const state = reactive({
-      datas: []
+    const state = reactive<IListState>({
+      datas: [],
+      wowNum: 0,
+      page: 1
     })
 
+    const router = useRouter()
+
     const getData = async () => {
-      const res = await articleList()
+      const res: any = await articleList({
+        params: {
+          page: state.page,
+        }
+      })
       state.datas = res.body.data
       console.log('datas--', state.datas)
     }
 
     onMounted(() => {
       getData()
+      // const data = JSON.parse(JSON.stringify(sessionStorage.getItem('user')))
+      // console.log('user--', data.email)
     })
 
-    const toDetail = () => {
-      console.log('de')
+    const toDetail = (id: number) => {
+      router.push({name: 'Detail', params: { id }})
     }
 
     return {
@@ -63,10 +76,10 @@ export default {
       toDetail
     }
   }
-}
+})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .content-wrap {
   position: relative;
   width: 1100px;

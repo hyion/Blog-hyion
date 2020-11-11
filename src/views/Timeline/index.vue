@@ -10,9 +10,9 @@
       <div class="info">
         <div class="title f-flex align-center justify-center" v-if="userInfo">
           <img class="avatar" v-if="userInfo" :src="userInfo.avatar" alt="avatar">
-          <span>{{ userInfo.cover.title }}</span>
+          <span v-if="userInfo && userInfo.cover">{{ userInfo.cover.title }}</span>
         </div>
-        <p class="content" v-if="userInfo">{{userInfo.cover.describe}}</p>
+        <p class="content" v-if="userInfo && userInfo.cover">{{ userInfo.cover.describe }}</p>
       </div>
     </section>
     <Articles />
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import Parallax from 'parallax-js'
-import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs, computed } from 'vue'
 import { getUserinfo } from '/@/api/user'
 import MAIN_URL from '/@/assets/images/main.jpg'
 import Articles from './List.vue'
@@ -46,8 +46,8 @@ export default defineComponent({
 
     const store = useStore()
 
-    let wWidth = document.documentElement.clientWidth
-    let wHeight = document.documentElement.clientHeight
+    let wWidth: number = document.documentElement.clientWidth
+    let wHeight: number = document.documentElement.clientHeight
     state.imgWidth = wWidth + 150
     state.imgHeight = wHeight + 150
     if (wWidth <= 600) { state.imgWidth = 1920 / 1.3; state.imgHeight = 960 }
@@ -60,20 +60,11 @@ export default defineComponent({
       })
     }
 
-    const getUserData = async () => {
-      store.commit('setShowPageLoadScrollBar', true)
-      try {
-        const res:any = await getUserinfo()
-        state.userInfo = res.body
-        console.log('userinfo--', state.userInfo)
-      } catch {
-        store.commit('setShowPageLoadScrollBar', false)
-      }
-    }
+    // 从vuex中取出用户信息
+    state.userInfo = computed(() => JSON.parse(JSON.stringify(store.getters.user)))
 
     onMounted(() => {
       initScene()
-      getUserData()
     })
 
     return {
@@ -83,7 +74,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .timeline-wrapper {
   overflow: hidden;
 }

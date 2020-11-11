@@ -27,6 +27,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('/@/views/Articles/index.vue'),
     meta: { title: '文章列表  | Hurray' }
   },
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: () => import('/@/views/Detail/index.vue'),
+    meta: { title: 'Hurray' }
+  },
 ];
 
 const router = createRouter({

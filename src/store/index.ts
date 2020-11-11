@@ -9,7 +9,7 @@ interface IState {
 
 const state: IState = {
   showPageLoadScrollBar: false,
-  userInfo: {}
+  userInfo: sessionStorage.getItem('user') ? JSON.parse(JSON.stringify(sessionStorage.getItem('user'))) : {}
 }
 
 const app = createStore({
@@ -28,9 +28,13 @@ const app = createStore({
     }
   },
   actions: {
-    async getUserData() {
-      const res:any = await getUserinfo()
-      state.userInfo = res.body
+    getUserData() {
+      return new Promise(async (resolve) => {
+        const res:any = await getUserinfo()
+        state.userInfo = res.body
+        sessionStorage.setItem('user', JSON.stringify(res.body))
+        resolve(res.body)
+      })
     }
   },
   modules: {}

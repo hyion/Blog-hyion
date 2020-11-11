@@ -1,6 +1,10 @@
 <template>
   <div class="center-con f-flexjac">
-    <div class="wrapper">
+    <div class="avatar-wrapper">
+      <img class="avatar" v-if="userData" :src="userData.avatar" alt="avatar">
+      <h1>Hyion</h1>
+    </div>
+    <!-- <div class="wrapper">
       <div class="slash"></div>
       <div class="sides">
         <div class="side"></div>
@@ -17,7 +21,7 @@
           <div class="inner">hurray</div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="navgation">
       <ul class="f-flex align-center justify-center flex-wrap">
         <template v-for="item in navgationData" :key="item.path">
@@ -38,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from 'vue'
+import { defineComponent, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { IState } from '../interface'
@@ -66,16 +70,18 @@ export default defineComponent({
     const onRoute = (path: string) => {
       router.push(path)
     }
-    store.dispatch('getUserData')
-    state.userData = store.getters.user
-    console.log('store--', store, state)
+
+    store.dispatch('getUserData').then(res => {
+      console.log('getUserData--', res)
+      state.userData = res
+    })
 
     return { ...toRefs(state), onRoute }
   }
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .center-con {
   flex-direction: column;
@@ -211,7 +217,7 @@ export default defineComponent({
     font-size: 16px;
     color: #fff;
     .navgation-item {
-      margin: 20px 30px 0 0;
+      margin: 10px 30px 0 0;
       font-size: 18px;
       font-weight: 500;
       transition: all 0.6s;
@@ -220,6 +226,24 @@ export default defineComponent({
         color: rgb(66, 245, 135);
         opacity: 0.8;
       }
+    }
+  }
+  .avatar-wrapper {
+    text-align: center;
+    h1 {
+      margin-top: 1px;
+    }
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      transition: all 0.9s;
+      animation: scaleLogo infinite 3s;
+    }
+  }
+  .user {
+    .email {
+      margin-right: 5px;
     }
   }
 }
@@ -352,6 +376,21 @@ export default defineComponent({
   }
   100% {
     transform: translateX(-300%);
+  }
+}
+
+@keyframes scaleLogo {
+  0% {
+    transform: rotate(0deg) scale(.8);
+    opacity: 1;
+  }
+  25% {
+    transform: rotate(0deg) scale(1);
+    opacity: .8;
+  }
+  100% {
+    transform: rotate(0deg) scale(.8);
+    opacity: 1;
   }
 }
 </style>

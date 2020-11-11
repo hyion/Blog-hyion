@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @keyframes shadow {
   0% { background-position-x: 0%;}
   50% { background-position-x: 100%; }

@@ -485,6 +485,11 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+animate.css@latest:
+  version "4.1.1"
+  resolved "https://registry.npm.taobao.org/animate.css/download/animate.css-4.1.1.tgz#614ec5a81131d7e4dc362a58143f7406abd68075"
+  integrity sha1-YU7FqBEx1+TcNipYFD90BqvWgHU=
+
 ansi-colors@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/ansi-colors/download/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"
@@ -2973,6 +2978,13 @@ word-wrap@^1.2.3:
   version "1.2.3"
   resolved "https://registry.npm.taobao.org/word-wrap/download/word-wrap-1.2.3.tgz?cache=0&sync_timestamp=1589683603678&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fword-wrap%2Fdownload%2Fword-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
   integrity sha1-YQY29rH3A4kb00dxzLF/uTtHB5w=
+
+wowjs@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npm.taobao.org/wowjs/download/wowjs-1.1.3.tgz#440fc1bb4c7e896840ee47972296a2b59075acbd"
+  integrity sha1-RA/Bu0x+iWhA7keXIpaitZB1rL0=
+  dependencies:
+    animate.css latest
 
 wrappy@1:
   version "1.0.2"

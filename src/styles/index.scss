@@ -1,6 +1,21 @@
 @import './common.scss';
 @import './flex';
 
+:root {
+  --colorBar: #50bcb6;
+  --colorActive: #0084ff;
+  --colorComment: #ef6d57;
+  --colorDefault: #24292e;
+  --colorTitle: #2c3e50;
+  --colorGreen: #26a69a;
+}
+
+// 改变鼠标选中文字的样式
+::selection {
+  background: var(--colorGreen) !important;
+  color: #fff !important;
+}
+
 #app {
   position: relative;
   height: 100%;

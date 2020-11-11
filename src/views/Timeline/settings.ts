@@ -11,3 +11,9 @@ export interface IState {
   date?: IDate,
   userInfo: any
 }
+
+export interface IListState {
+  datas: any[],
+  wowNum: number,
+  page: number
+}
