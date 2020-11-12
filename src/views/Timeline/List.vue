@@ -39,7 +39,7 @@ import { articleList } from '/@/api/articles'
 import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 // import { WOW } from 'wowjs'
 import { useRouter } from 'vue-router'
-import { IListState } from './settings'
+import { IListState } from './interface'
 
 export default defineComponent({
   setup() {
@@ -58,13 +58,10 @@ export default defineComponent({
         }
       })
       state.datas = res.body.data
-      console.log('datas--', state.datas)
     }
 
     onMounted(() => {
       getData()
-      // const data = JSON.parse(JSON.stringify(sessionStorage.getItem('user')))
-      // console.log('user--', data.email)
     })
 
     const toDetail = (id: number) => {

@@ -1,5 +1,5 @@
 <template>
-  <section class="header">
+  <section class="header" :class="isShow ? 'bo-shadow' : ''">
     <div class="user left">
       用户
     </div>
@@ -20,7 +20,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, toRefs, onBeforeUnmount } from 'vue'
+
+interface IState {
+  isShow: boolean,
+  userInfo: any[] | string | (()=>string) | object
+}
 const Header = defineComponent({
   props: {
     title: {
@@ -29,6 +34,29 @@ const Header = defineComponent({
     }
   },
   setup() {
+    const state = reactive<IState>({
+      isShow: false,
+      userInfo: {}
+    })
+    const onScroll = (e: any) => {
+      const scop: number = document.documentElement.scrollTop
+      if (scop >= 50) {
+        state.isShow = true
+      } else {
+        state.isShow = false
+      }
+    }
+    window.addEventListener('scroll', onScroll)
+
+    onBeforeUnmount(() => { // 实例销毁前移除scroll监听事件
+      window.removeEventListener('scroll', onScroll)
+    })
+
+    const user: any = sessionStorage.getItem('user')
+    state.userInfo = JSON.parse(user)
+    return {
+      ...toRefs(state)
+    }
   }
 })
 export default Header
@@ -42,6 +70,7 @@ export default Header
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #f6f7f8;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,7 +78,7 @@ export default Header
   padding: 0 15px;
   background: #fff;
   z-index: 99999;
-  transition: all 0.3s;
+  transition: all 0.5s;
   .title {
     font-size: 18px;
     font-weight: 600;
@@ -58,7 +87,7 @@ export default Header
     .icon {
       margin: 0 5px;
       .svg-icon {
-        fill: #666;
+        fill: var(--colorLight);
         cursor: pointer;
         transition: all .3s;
         &.circle:hover {
@@ -71,6 +100,9 @@ export default Header
         }
       }
     }
+  }
+  &.bo-shadow {
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .08);
   }
 }
 </style>

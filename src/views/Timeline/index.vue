@@ -27,7 +27,7 @@ import { getUserinfo } from '/@/api/user'
 import MAIN_URL from '/@/assets/images/main.jpg'
 import Articles from './List.vue'
 import { useStore } from 'vuex'
-import { IState } from './settings'
+import { IState } from './interface'
 
 export default defineComponent({
   components: { Articles },
@@ -61,7 +61,9 @@ export default defineComponent({
     }
 
     // 从vuex中取出用户信息
-    state.userInfo = computed(() => JSON.parse(JSON.stringify(store.getters.user)))
+    // state.userInfo = computed(() => JSON.parse(store.getters.user)))
+    const user: any = sessionStorage.getItem('user')
+    state.userInfo = JSON.parse(user)
 
     onMounted(() => {
       initScene()

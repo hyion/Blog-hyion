@@ -18,7 +18,8 @@ interface IState {
     content: string,
     title: string
   },
-  content: string
+  content: string,
+  
 }
 
 export default defineComponent({
@@ -29,7 +30,7 @@ export default defineComponent({
         content: '',
         title: ''
       },
-      content: ''
+      content: '',
     })
 
     const route = useRoute()
@@ -49,6 +50,7 @@ export default defineComponent({
       });
       state.content = marked(data)
     }
+
     const getData = async () => {
       const res: any = await article(route.params.id)
       state.temp = res.body
@@ -56,7 +58,6 @@ export default defineComponent({
       console.log('datas--', state.temp)
       markdownRender(state.temp.content)
     }
-    // getData()
 
     onMounted(() => {
       getData()

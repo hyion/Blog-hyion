@@ -15,8 +15,8 @@ import { useStore } from 'vuex'
 
 export default {
   setup() {
-    // const data = getCurrentInstance()
-    // console.log('getCurrentInstance--', data)
+    const data = getCurrentInstance()
+    console.log('getCurrentInstance--', data)
     // const state = reactive({
     //   loading: false
     // })
