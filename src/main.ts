@@ -9,6 +9,9 @@ import 'element-plus/lib/theme-chalk/index.css'
 // import Antd from 'ant-design-vue';
 // import 'ant-design-vue/dist/antd.css';
 
+import 'github-markdown-css/github-markdown.css'
+
+
 const Vue = createApp(App)
 
 // 加载公共组件
@@ -19,7 +22,6 @@ Object.keys(components).forEach((key) => {
   Vue.component(name, components[key])
 })
 
-// Vue.use(Antd)
 Vue.use(ElementPlus)
 Vue.use(router)
 Vue.use(store)
