@@ -1,9 +1,9 @@
 <template>
   <section class="header" :class="isShow ? 'bo-shadow' : ''">
-    <div class="user left">
-      用户
+    <div class="user-left">
+      <img class="avatar" :src="userInfo.avatar" alt="avatar">
     </div>
-    <div class="title">{{ title }}</div>
+    <div class="title" :class="!isShow ? 'hid' : ''">{{ title }}</div>
     <div class="right-menu f-flex">
       <div class="icon">
         <svg t="1605169953545" class="svg-icon circle" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1172" width="20" height="20">
@@ -30,7 +30,7 @@ const Header = defineComponent({
   props: {
     title: {
       type: String,
-      default: 'nginx 安装 并 配置gzip和br'
+      default: ''
     }
   },
   setup() {
@@ -82,6 +82,10 @@ export default Header
   .title {
     font-size: 18px;
     font-weight: 600;
+    transition: all .4s ease-in;
+    &.hid {
+      opacity: 0;
+    }
   }
   .right-menu {
     .icon {
@@ -103,6 +107,18 @@ export default Header
   }
   &.bo-shadow {
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .08);
+  }
+  .user-left {
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      transition: all 0.4s;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
   }
 }
 </style>

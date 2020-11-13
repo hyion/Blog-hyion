@@ -36,10 +36,12 @@
   align-items: center;
 }
 
-.align-center{ align-items: center; }
-.justify-center{ justify-content: center; }
-.space-around{ justify-content: space-around; }
-.space-between{ justify-content: space-between; }
-.flex-wrap{ flex-wrap: wrap; }
-.flex-column{ flex-direction: column; }
-.bold{ font-weight: bold; }
+.align-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-start { justify-content: flex-start }
+.justify-end { justify-content: flex-end }
+.space-around { justify-content: space-around; }
+.space-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-column { flex-direction: column; }
+.bold { font-weight: bold; }

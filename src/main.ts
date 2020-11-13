@@ -23,6 +23,7 @@ Object.keys(components).forEach((key) => {
 })
 
 Vue.use(ElementPlus)
+// Vue.use(Antd)
 Vue.use(router)
 Vue.use(store)
 Vue.mount('#app')
