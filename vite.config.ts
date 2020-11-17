@@ -16,7 +16,8 @@ module.exports = {
     '/@/': pathResolve('./src'),
     '/@/views': pathResolve('./src/views'),
     '/@/api': pathResolve('./src/api'),
-    '/@/components': pathResolve('./src/components')
+    '/@/components': pathResolve('./src/components'),
+    '/@/utils': pathResolve('./src/utils')
   },
   proxy: {
     // '/lsbdb': 'http://10.192.195.96:3088/',

@@ -14,3 +14,10 @@ export function article(data?: any) {
     method: 'get'
   })
 }
+
+export function articleLike(data: any) {
+  return Service({
+    url: `article_like/${data}`,
+    method: 'put'
+  })
+}

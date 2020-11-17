@@ -24,7 +24,7 @@
 import Parallax from 'parallax-js'
 import { defineComponent, onMounted, reactive, toRefs, computed } from 'vue'
 import { getUserinfo } from '/@/api/user'
-import MAIN_URL from '/@/assets/images/main.jpg'
+import MAIN_URL from '/@/assets/images/main.png'
 import Articles from './List.vue'
 import { useStore } from 'vuex'
 import { IState } from './interface'

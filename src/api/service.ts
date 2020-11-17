@@ -31,7 +31,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data // res is my own data
     // console.log(res)
-    if (res.status === 200) {
+    if (res.status === 200 || res.ok === 1) {
       return Promise.resolve(res)
     } else {
       return Promise.reject(new Error(res.msg || 'Error'))

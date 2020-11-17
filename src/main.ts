@@ -6,8 +6,8 @@ import store from './store'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
-// import Antd from 'ant-design-vue';
-// import 'ant-design-vue/dist/antd.css';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
 
 import 'github-markdown-css/github-markdown.css'
 
@@ -23,7 +23,7 @@ Object.keys(components).forEach((key) => {
 })
 
 Vue.use(ElementPlus)
-// Vue.use(Antd)
+Vue.use(Antd)
 Vue.use(router)
 Vue.use(store)
 Vue.mount('#app')

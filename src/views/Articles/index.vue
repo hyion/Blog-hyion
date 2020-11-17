@@ -1,5 +1,7 @@
 <template>
-  <div>articles</div>
+  <div class="articles-page">
+    <hy-header />
+  </div>
 </template>
 
 <script>

@@ -232,6 +232,7 @@ export default defineComponent({
     text-align: center;
     h1 {
       margin-top: 1px;
+      color: #fff;
     }
     .avatar {
       width: 100px;

@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <hy-header :title="temp.title" />
+    <hy-header :title="temp.title" @like="onLike" :isLike="isLike" />
     <section class="header-con f-flex justify-start flex-column">
       
       <div class="sub-title f-flex justify-start">
@@ -23,16 +23,20 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { article } from '/@/api/articles'
+import { article, articleLike } from '/@/api/articles'
 import marked from 'marked'
+import { message } from 'ant-design-vue';
+import { setStore, getStore } from '/@/utils/store'
 
 interface IState {
   temp: {
     content: string,
-    title: string
+    title: string,
+    _id: string,
+    like: number
   },
   content: string,
-  
+  isLike: boolean
 }
 
 export default defineComponent({
@@ -41,9 +45,12 @@ export default defineComponent({
     const state = reactive<IState>({
       temp: {
         content: '',
-        title: ''
+        title: '',
+        _id: '',
+        like: 0
       },
       content: '',
+      isLike: false
     })
 
     const route = useRoute()
@@ -70,14 +77,33 @@ export default defineComponent({
       document.title = state.temp.title
       console.log('datas--', state.temp)
       markdownRender(state.temp.content)
+
+      const like = getStore(`like-${state.temp._id}`);
+      state.isLike = Boolean(like)
+      console.log('state--', state)
     }
 
     onMounted(() => {
       getData()
     })
 
+    const onLike = async (e: any) => {
+      console.log(e)
+      if (!e) {
+        const res: any = await articleLike(state.temp._id)
+        console.log('liked--', res)
+        state.temp.like++
+        setStore(`like-${state.temp._id}`, true)
+        state.isLike = true
+        message.success('已收到你的喜欢, 谢谢啦~')
+      } else {
+        message.info('本文你已经喜欢过啦~')
+      }
+    }
+
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      onLike
     }
   }
 })
