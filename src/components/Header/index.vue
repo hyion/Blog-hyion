@@ -5,7 +5,7 @@
     </div>
     <div class="title" :class="!isShow ? 'hid' : ''">{{ title }}</div>
     <div class="right-menu f-flex">
-      <div class="icon" @click="$emit('like', isLike)" :class="{'like': isLike}">
+      <div v-if="isShowLike" class="icon" :class="{'like': isLike}" @click="$emit('like', isLike)">
         <svg t="1605169953545" class="svg-icon circle" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1172" width="20" height="20">
           <path d="M694.830025 110.467951c-76.670194 0-137.458675 38.335097-184.008874 101.313453-47.096644-62.978357-107.339704-101.313453-184.009897-101.313453-138.554636 0-251.372098 122.126478-251.372098 272.730545 0 89.814562 40.524972 152.793942 72.839959 203.178469 93.64582 147.31516 319.826166 305.58686 329.682651 313.254493 9.856485 7.667633 20.810978 10.951423 32.30987 10.951423 11.502985 0 22.454408-3.831258 32.30987-10.951423 9.860579-7.667633 236.036831-166.484755 330.23626-313.254493 32.30987-50.385551 72.833819-113.364931 72.833819-203.178469C945.653631 233.141898 832.842309 110.467951 694.830025 110.467951L694.830025 110.467951 694.830025 110.467951 694.830025 110.467951 694.830025 110.467951z" p-id="1173"></path>
         </svg>
@@ -21,12 +21,13 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 interface IState {
   isShow: boolean,
   userInfo: any[] | string | (()=>string) | object,
-  classLike: boolean
+  classLike: boolean,
+  isShowLike: boolean
 }
 const Header = defineComponent({
   props: {
@@ -43,10 +44,12 @@ const Header = defineComponent({
     const state = reactive<IState>({
       isShow: false,
       userInfo: {},
-      classLike: false
+      classLike: false,
+      isShowLike: false
     })
 
     const router = useRouter()
+    const route = useRoute()
 
     const onScroll = (e: any) => {
       const scop: number = document.documentElement.scrollTop
@@ -72,7 +75,8 @@ const Header = defineComponent({
       router.push('/')
     }
 
-    //  state.classLike = computed(() => props.isLike)
+    state.isShowLike = Boolean(route.name === 'Detail') // 只有文章详情页才显示喜欢按钮
+
     return {
       ...toRefs(state),
       goAbout,
