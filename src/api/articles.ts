@@ -2,9 +2,9 @@ import Service from './service'
 
 export function articleList(data?: any) {
   return Service({
-    url: 'article',
+    url: data ? 'article/' : `article/?from=list`,
     method: 'get',
-    data: data ? data : { from: 'list' }
+    data: data
   })
 }
 

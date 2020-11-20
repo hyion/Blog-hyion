@@ -8,7 +8,7 @@ const pathResolve = (pathStr: string) => {
 module.exports = {
   // hostname: '0.0.0.0',
   base: './',
-  port: 9527,
+  port: 9526,
   open: false, // 是否自动在浏览器打开
   https: false, // 是否开启 https
   ssr: false, // 服务端渲染
