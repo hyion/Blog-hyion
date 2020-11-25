@@ -4,7 +4,7 @@
     <section class="articles-container">
       <div class="year-list" v-for="(val, key, idx) in datas" :key="idx">
         <ul class="mon-list" v-for="(vals, keys, idxs) in val" :key="idxs">
-          <li class="month">{{enMon[Number(keys) - 1]}}, {{key.slice(1, 5)}}</li>
+          <li class="month">{{ enMon[Number(keys) - 1] }}, {{ key.slice(1, 5) }}</li>
           <ul class="day-list">
             <li v-for="(child_val, child_key, child_idx) in vals" :key="child_idx">
               <div class="item-l">
@@ -12,11 +12,13 @@
                   <img :src="child_val.image.url || '/image/other/default.jpg'" />
                 </div>
                 <div class="tit">
-                  <span class="text" @click="handleDetail(child_val.id)">{{child_val.title}}</span>
-                  <span>{{child_val.like}} 喜欢 / {{child_val.read}} 阅读</span>
+                  <span class="text" @click="handleDetail(child_val.id)">{{
+                    child_val.title
+                  }}</span>
+                  <span>{{ child_val.like }} 喜欢 / {{ child_val.read }} 阅读</span>
                 </div>
               </div>
-              <span class="item-r">{{child_val.time.day.en}}</span>
+              <span class="item-r">{{ child_val.time.day.en }}</span>
             </li>
           </ul>
         </ul>
@@ -31,7 +33,7 @@ import { articleList } from '/@/api/articles'
 import { useRouter } from 'vue-router'
 
 interface IState {
-  datas: any[],
+  datas: any[]
   enMon: any[]
 }
 export default defineComponent({
@@ -58,7 +60,7 @@ export default defineComponent({
 
     const getData = async () => {
       const query = {
-         from: 'list' 
+        from: 'list',
       }
       const res: any = await articleList()
       state.datas = res.body.data
@@ -74,7 +76,7 @@ export default defineComponent({
     }
 
     return { ...toRefs(state), handleDetail }
-  }
+  },
 })
 </script>
 
@@ -179,8 +181,7 @@ export default defineComponent({
                       )
                       repeat-x;
                   background-size: 20px 20px;
-                  background-position: -10px calc(100% + 16px),
-                    0 calc(100% - 4px);
+                  background-position: -10px calc(100% + 16px), 0 calc(100% - 4px);
                   animation: waveFlow 1s infinite linear;
                 }
                 @keyframes waveFlow {

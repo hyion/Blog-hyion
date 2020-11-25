@@ -1,12 +1,14 @@
 <template>
-  <hy-scrollbar />
-  <hy-loading :showLoading="loading" />
-  <router-view v-slot="{ Component, route }">
-    <!-- Use any custom transition and fallback to `fade` -->
-    <transition :name="route.meta.transition || 'fade'" mode="out-in">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <div>
+    <hy-scrollbar />
+    <hy-loading :showLoading="loading" />
+    <router-view v-slot="{ Component, route }">
+      <!-- Use any custom transition and fallback to `fade` -->
+      <transition :name="route.meta.transition || 'fade'" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <script>
@@ -24,7 +26,7 @@ export default {
     const loading = computed(() => store.getters.isShowPageLoadScrollBar)
 
     return { loading }
-  }
+  },
 }
 </script>
 
