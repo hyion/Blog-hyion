@@ -6,3 +6,10 @@ export function getUserinfo() {
     method: 'get'
   })
 }
+
+export function getMyself() {
+  return Service({
+    url: 'myself',
+    method: 'get'
+  })
+}

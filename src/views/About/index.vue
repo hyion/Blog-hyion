@@ -1,9 +1,9 @@
 <template>
   <div class="about-page">
     <hy-header />
-    <a-button type="primary" @click="onCounte('12')"> Primary </a-button>
-    <p>about</p>
-    <p>isShowPageLoadScrollBar: {{ isShow }}</p>
+    <div class="content markdown-body">
+      <div v-html="content"></div>
+    </div>
     <div class="out-box">
       <ul>
         <li>1</li>
@@ -15,14 +15,18 @@
   </div>
 </template>
 
-<script>
-import { toRefs, reactive } from 'vue'
+<script lang="ts">
+import { toRefs, reactive, defineComponent, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { getMyself } from '/@/api/articles'
+import marked from 'marked'
 
-export default {
+export default defineComponent({
   setup() {
     const state = reactive({
       isShow: false,
+      datas: {},
+      content: ''
     })
     const store = useStore()
     // const isShowPageLoadScrollBar = store.getters.isShowPageLoadScrollBar
@@ -35,9 +39,35 @@ export default {
     }
     // console.log(isShowPageLoadScrollBar)
 
+    const markdownRender = (data: any) => {
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        pedantic: false,
+        gfm: true,
+        tables: true,
+        breaks: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false
+      });
+      state.content = marked(data)
+    }
+
+    const getData = async () => {
+      const res: any = await getMyself()
+      state.content = res.body
+      markdownRender(state.content)
+      console.log('datas--', state.content)
+    }
+
+    onMounted(() => {
+      getData()
+    })
+
     return { onCounte, ...toRefs(state) }
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>
