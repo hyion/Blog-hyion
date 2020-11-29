@@ -13,3 +13,10 @@ export function getMyself() {
     method: 'get'
   })
 }
+
+export function getMessage() {
+  return Service({
+    url: 'envelope',
+    method: 'get'
+  })
+}

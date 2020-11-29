@@ -33,6 +33,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('/@/views/Detail/index.vue'),
     meta: { title: 'Hurray' }
   },
+  {
+    path: '/message',
+    name: 'Message',
+    component: () => import('/@/views/Message/index.vue'),
+    meta: { title: '留言板  | Hurray' }
+  },
 ];
 
 const router = createRouter({
