@@ -18,7 +18,7 @@
 <script lang="ts">
 import { toRefs, reactive, defineComponent, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { getMyself } from '/@/api/articles'
+import { getMyself } from '/@/api/user'
 import marked from 'marked'
 
 export default defineComponent({
@@ -29,15 +29,6 @@ export default defineComponent({
       content: ''
     })
     const store = useStore()
-    // const isShowPageLoadScrollBar = store.getters.isShowPageLoadScrollBar
-    // console.log(store.getters.isShowPageLoadScrollBar)
-    const onCounte = (e) => {
-      // console.log(e)
-      store.commit('setShowPageLoadScrollBar', !store.getters.isShowPageLoadScrollBar)
-      // console.warn(store)
-      state.isShow = store.getters.isShowPageLoadScrollBar
-    }
-    // console.log(isShowPageLoadScrollBar)
 
     const markdownRender = (data: any) => {
       marked.setOptions({
@@ -56,16 +47,16 @@ export default defineComponent({
 
     const getData = async () => {
       const res: any = await getMyself()
-      state.content = res.body
-      markdownRender(state.content)
+      state.content = res.body.content
       console.log('datas--', state.content)
+      markdownRender(state.content)
     }
 
     onMounted(() => {
       getData()
     })
 
-    return { onCounte, ...toRefs(state) }
+    return { ...toRefs(state) }
   },
 })
 </script>
@@ -79,6 +70,9 @@ export default defineComponent({
   background-color: #fff;
   height: 100%;
   min-height: 100vh;
+  .content {
+    margin-top: 50px;
+  }
   .out-box {
     ul {
       display: flex;
@@ -105,6 +99,46 @@ export default defineComponent({
   }
   .out-box li:nth-child(4) {
     animation: myMove 1.5s ease 1.5s alternate infinite;
+  }
+
+  &::v-deep {
+     .markdown-body {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      padding: 100px 20px 40px;
+      box-shadow: none!important;
+      min-height: auto;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #24292e;
+      h1 {
+        border-bottom: 0;
+      }
+      p {
+        line-height: 30px;
+        margin: 0 0 18px;
+        font-size: 16px;
+      }
+      ul {
+        margin: 0 0 18px;
+        padding-left: 20px;
+        li {
+          font-size: 16px;
+          margin: 0 0 8px;
+          line-height: 28px;
+          list-style: none;
+          position: relative;
+          &::before {
+            content: '✧';
+            font-size: 8px;
+            position: absolute;
+            top: 0;
+            left: -16px;
+          }
+        }
+      }
+    }
   }
 
   @keyframes myMove {
