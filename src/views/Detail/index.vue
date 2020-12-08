@@ -25,7 +25,7 @@ import { defineComponent, reactive, toRefs, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { article, articleLike } from '/@/api/articles'
 import marked from 'marked'
-import { message } from 'ant-design-vue';
+import { ElMessage } from 'element-plus'
 import { setStore, getStore } from '/@/utils/store'
 
 interface IState {
@@ -95,9 +95,9 @@ export default defineComponent({
         state.temp.like++
         setStore(`like-${state.temp._id}`, true)
         state.isLike = true
-        message.success('已收到你的喜欢, 谢谢啦~')
+        ElMessage.success('已收到你的喜欢, 谢谢啦~')
       } else {
-        message.info('本文你已经喜欢过啦~')
+        ElMessage.info('本文你已经喜欢过啦~')
       }
     }
 

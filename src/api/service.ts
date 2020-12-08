@@ -2,9 +2,8 @@
  * 封装Axios
  * 处理请求、响应错误信息
  */
-// import { Message } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import axios from 'axios' // 引用axios
-import { Console } from 'console'
 
 // create an axios instance
 const service = axios.create({
@@ -34,11 +33,13 @@ service.interceptors.response.use(
     if (res.status === 200 || res.ok === 1) {
       return Promise.resolve(res)
     } else {
+      ElMessage.error(res.msg)
       return Promise.reject(new Error(res.msg || 'Error'))
     }
   },
   error => {
     console.log('err' + error) // for debug
+    ElMessage.error(error)
     return Promise.reject(error)
   }
 )
