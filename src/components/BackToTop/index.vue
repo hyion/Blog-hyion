@@ -101,4 +101,9 @@ export default defineComponent({
     }
   }
 }
+@media screen and (max-width: 800px) {
+  .to-top-container {
+    right: 0.5rem;
+  }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="about-page">
-    <hy-header />
+    <hy-header title="Hurray" />
     <div class="content markdown-body">
       <div v-html="content"></div>
     </div>
@@ -68,7 +68,7 @@ export default defineComponent({
   width: 100%;
   max-width: 1200px;
   background-color: #fff;
-  height: 100%;
+  // height: 100%;
   min-height: 100vh;
   .content {
     margin-top: 50px;
@@ -144,7 +144,7 @@ export default defineComponent({
   @keyframes myMove {
     0% {
       color: rgb(229, 255, 80);
-      top: 160px;
+      top: 120px;
       transform: rotateY(0deg) scale(1);
     }
     50% {
@@ -154,8 +154,23 @@ export default defineComponent({
     }
     100% {
       color: rgb(255, 106, 198);
-      top: 160px;
+      top: 120px;
       transform: rotateY(0deg) scale(1);
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .about-page {
+    width: 90%;
+    .out-box {
+      display: none;
+      ul {
+        li {
+          margin: 10px;
+          font-size: 20px;
+        }
+      }
     }
   }
 }

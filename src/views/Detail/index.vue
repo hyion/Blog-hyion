@@ -139,4 +139,10 @@ $border-1px: 1px solid rgba(7, 17, 27, 0.1);
     font-size: 14px;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .detail {
+    width: 90%;
+  }
+}
 </style>

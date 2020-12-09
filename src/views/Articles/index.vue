@@ -213,4 +213,26 @@ export default defineComponent({
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  .articles-page {
+    .articles-container {
+      width: 95%;
+      .year-list {
+        padding: 10px;
+        .day-list {
+          padding-left: 10px;
+          .text {
+            font-size: 16px !important;
+          }
+        }
+      }
+      .mon-list {
+        .month {
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
 </style>
