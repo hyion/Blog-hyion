@@ -7,12 +7,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import Center from './children/center.vue'
 
-export default {
+export default defineComponent({
   components: { Center },
-}
+})
 </script>
 
 <style lang="scss" scoped>

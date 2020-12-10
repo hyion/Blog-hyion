@@ -3,7 +3,6 @@
     <hy-scrollbar />
     <hy-loading :showLoading="loading" />
     <router-view v-slot="{ Component, route }">
-      <!-- Use any custom transition and fallback to `fade` -->
       <transition :name="route.meta.transition || 'fade'" mode="out-in">
         <component :is="Component" />
       </transition>
@@ -11,14 +10,12 @@
   </div>
 </template>
 
-<script>
-import { reactive, computed, toRefs, provide, ref, getCurrentInstance } from 'vue'
+<script lang="ts">
+import { defineComponent, reactive, computed, toRefs, } from 'vue'
 import { useStore } from 'vuex'
 
-export default {
+export default defineComponent({
   setup() {
-    const data = getCurrentInstance()
-    console.log('getCurrentInstance--', data)
     // const state = reactive({
     //   loading: false
     // })
@@ -27,7 +24,7 @@ export default {
 
     return { loading }
   },
-}
+})
 </script>
 
 <style lang="scss">
