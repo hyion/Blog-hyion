@@ -16,9 +16,6 @@ import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
-    // const state = reactive({
-    //   loading: false
-    // })
     const store = useStore()
     const loading = computed(() => store.getters.isShowPageLoadScrollBar)
 

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import { reactive, computed, toRefs } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'PageLoadScrollBar',
   setup() {
     const store = useStore()
@@ -16,7 +16,7 @@ export default {
 
     return { getIsShow }
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

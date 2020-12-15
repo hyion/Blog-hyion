@@ -61,7 +61,6 @@ export default defineComponent({
     }
 
     // 从vuex中取出用户信息
-    // state.userInfo = computed(() => JSON.parse(store.getters.user)))
     const user: any = sessionStorage.getItem('user')
     state.userInfo = JSON.parse(user)
 

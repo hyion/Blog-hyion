@@ -88,10 +88,8 @@ export default defineComponent({
     })
 
     const onLike = async (e: any) => {
-      console.log(e)
       if (!e) {
         const res: any = await articleLike(state.temp._id)
-        console.log('liked--', res)
         state.temp.like++
         setStore(`like-${state.temp._id}`, true)
         state.isLike = true
