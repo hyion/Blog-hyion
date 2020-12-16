@@ -1,6 +1,6 @@
 # Hyion
 
->一个基于Vue3.0 + Typescript + Vite + Axios + Sass + element的个人博客
+>一个基于Vue3.0 + Typescript + Vite + Axios + Sass + element-plus的个人博客
 
 ### 项目基础代码架构说明
 
