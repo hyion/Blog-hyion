@@ -40,7 +40,7 @@ export default defineComponent({
   .layout-bg {
     width: 100%;
     height: 100vh;
-    animation: shadow 15s infinite ;
+    animation: shadow 15s infinite;
     background: linear-gradient(125deg,#2980b9,#633bd3,#8e44ad,#192f44,#27ae60);
     background-size: 800%;
     z-index: -99;
