@@ -21,7 +21,8 @@
   "devDependencies": {
     "@types/node": "^14.14.6",
     "@vitejs/plugin-vue": "^1.1.5",
-    "@vue/compiler-sfc": "^3.0.2",
+    "@vue/compiler-sfc": "^3.0.7",
+    "autoprefixer": "^10.2.4",
     "babel-plugin-import": "^1.13.1",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",

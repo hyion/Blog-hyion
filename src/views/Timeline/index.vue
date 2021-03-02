@@ -15,27 +15,62 @@
         <p class="content" v-if="userInfo && userInfo.cover">{{ userInfo.cover.describe }}</p>
       </div>
     </section> -->
+    <header id="header">
+      <div class="view">
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt=""> -->
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt=""> -->
+        <img :src="winter_view_1" class="morning" alt="">
+        <img :src="winter_view_2" class="afternoon" alt="">
+        <video autoplay loop muted class="evening">
+          <source :src="winter_view_3" type="video/webm">
+          <!-- <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" /> -->
+        </video>
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt=""> -->
+        <img :src="winter_view_3_snow" class="window-cover" alt="">
+      </div>
+      
+      <div class="tree">
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt=""> -->
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt=""> -->
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt=""> -->
+        <img :src="winter_tree_1" class="morning" alt="">
+        <img :src="winter_tree_2" class="afternoon" alt="">
+        <img :src="winter_tree_3" class="evening" alt="">
+      </div>
+    </header>
     <Articles />
     <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop> -->
   </div>
 </template>
 
 <script lang="ts">
-import Parallax from 'parallax-js'
-import { defineComponent, onMounted, reactive, toRefs, computed } from 'vue'
-// import { getUserinfo } from '@/api/user'
+import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 import MAIN_URL from '@/assets/images/main.png'
+import winter_view_1 from '@/assets/images/bilibili-winter-view-1.webp'
+import winter_view_2 from '@/assets/images/bilibili-winter-view-2.webp'
+import winter_view_3 from '@/assets/images/bilibili-winter-view-3.webm'
+import winter_view_3_snow from '@/assets/images/bilibili-winter-view-3-snow.png'
+import winter_tree_1 from '@/assets/images/bilibili-winter-tree-1.webp'
+import winter_tree_2 from '@/assets/images/bilibili-winter-tree-2.webp'
+import winter_tree_3 from '@/assets/images/bilibili-winter-tree-3.webp'
 import Articles from './List.vue'
 import { useStore } from 'vuex'
-import { IState } from './interface'
+// import { IState } from './interface'
 
 export default defineComponent({
   components: { Articles },
   setup() {
-    const state = reactive<IState>({
+    const state = reactive({
       imgWidth: 0,
       imgHeight: 0,
       imageUrl: MAIN_URL,
+      winter_view_1,
+      winter_view_2,
+      winter_view_3,
+      winter_view_3_snow,
+      winter_tree_1,
+      winter_tree_2,
+      winter_tree_3,
       date: {
         month: 0,
         day: 0,
@@ -46,26 +81,29 @@ export default defineComponent({
 
     const store = useStore()
 
-    let wWidth: number = document.documentElement.clientWidth
-    let wHeight: number = document.documentElement.clientHeight
-    state.imgWidth = wWidth + 150
-    state.imgHeight = wHeight + 150
-    if (wWidth <= 600) { state.imgWidth = 1920 / 1.3; state.imgHeight = 960 }
-
-    const initScene = () => {
-      const scene = document.querySelector('#scene')
-      const parallaxInstance = new Parallax(scene, {
-        relativeInput: true,
-        clipRelativeInput: true,
-      })
-    }
-
     // 从vuex中取出用户信息
     const user: any = sessionStorage.getItem('user')
     state.userInfo = JSON.parse(user)
 
     onMounted(() => {
-      // initScene()
+      let startingPoint: number
+      const header = document.querySelector('#header') as HTMLElement
+
+      header.addEventListener('mouseenter', (e) => {
+        startingPoint = e.clientX
+        header.classList.add('moving')
+      })
+
+      header.addEventListener('mouseout', (e) => {
+        header.classList.remove('moving')
+        header.style.setProperty('--percentage', '0.5')
+      })
+
+      header.addEventListener('mousemove', (e) => {
+        let percentage = (e.clientX - startingPoint) / window.outerWidth + 0.5
+        
+        header.style.setProperty('--percentage', String(percentage))
+      })
     })
 
     return {
@@ -78,80 +116,70 @@ export default defineComponent({
 <style lang="scss" scoped>
 .timeline-wrapper {
   overflow: hidden;
-}
-.timeline {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 29;
-  .layer {
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    .move-img {
-      margin-bottom: 20px;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      position: absolute;
-      max-width: none;
-      display: block;
-    }
-  }
-  .mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #4c50cf86;
-    clip-path: polygon(0 0,25% 0,60% 100%,0 100%);
-    pointer-events: none;
-  }
-  .info {
-    position: absolute;
-    top: 54%;
-    left: 10%;
-    color: #fff;
-    width: 30%;
-    transform: translateY(-50%);
-    color: #ffffff;
-    font-size: .5rem;
-    .time {
-      font-size: 14px;
-    }
-    .title {
-      font-size: 0.8rem;
-      margin: 15px 0;
-      flex-direction: column;
-      .avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        transition: all 0.9s;
-        animation: scaleLogo infinite 3s;
-      }
-    }
-    .content {
-      font-size: 15px;
-      text-align: center;
-    }
-  }
+  background-color: #f2f5f7;
 }
 
-@keyframes scaleLogo {
-  0% {
-    transform: rotate(0deg) scale(.8);
-    opacity: 1;
-  }
-  25% {
-    transform: rotate(0deg) scale(1);
-    opacity: .8;
-  }
-  100% {
-    transform: rotate(0deg) scale(.8);
-    opacity: 1;
-  }
+header {
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  --percentage: 0.5;
+}
+
+header .view, header .tree {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header img, header video {
+  position: absolute;
+  display: block;
+  width: 120%;
+  height: 100%;
+  object-fit: cover;
+}
+
+header .morning {
+  z-index: 20;
+  opacity: calc(1 - (var(--percentage) - 0.25) / 0.25);
+}
+
+header .afternoon {
+  z-index: 10;
+  opacity: calc(1 - (var(--percentage) - 0.5) / 0.5);
+}
+
+header .view {
+  transform: translatex(calc(var(--percentage) * 100px));
+}
+
+header .tree {
+  transform: translatex(calc(var(--percentage) * 50px));
+  filter: blur(3px);
+}
+
+header .view,
+header .tree,
+header .morning,
+header .afternoon {
+  transition: .2s all ease-in;
+}
+
+header.moving .view,
+header.moving .tree,
+header.moving .morning,
+header.moving .afternoon {
+  transition: none;
+}
+
+header .window-cover {
+  opacity: calc((var(--percentage) - 0.9) / 0.1);
 }
 </style>
+
