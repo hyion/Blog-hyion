@@ -43,7 +43,9 @@ const Header = defineComponent({
   setup(props) {
     const state = reactive<IState>({
       isShow: false,
-      userInfo: {},
+      userInfo: {
+        avatar: '',
+      },
       classLike: false,
       isShowLike: false
     })

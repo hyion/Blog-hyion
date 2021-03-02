@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from 'vue'
-import { articleList } from '/@/api/articles'
+import { articleList } from '@/api/articles'
 import { useRouter } from 'vue-router'
 
 interface IState {

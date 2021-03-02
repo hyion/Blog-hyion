@@ -1,15 +1,17 @@
-import { getUserinfo } from '/@/api/user'
+import { getUserinfo } from '@/api/user'
 import { createStore, Store } from 'vuex'
 import { userInfo } from 'os'
 // import {} from '@types'
 interface IState {
-  showPageLoadScrollBar: boolean,
+  showPageLoadScrollBar: boolean
   userInfo: any
 }
 
 const state: IState = {
   showPageLoadScrollBar: false,
-  userInfo: sessionStorage.getItem('user') ? JSON.parse(JSON.stringify(sessionStorage.getItem('user'))) : {}
+  userInfo: sessionStorage.getItem('user')
+    ? JSON.parse(JSON.stringify(sessionStorage.getItem('user')))
+    : {},
 }
 
 const app = createStore({
@@ -20,23 +22,23 @@ const app = createStore({
     },
     user(state: any) {
       return state.userInfo
-    }
+    },
   },
   mutations: {
     setShowPageLoadScrollBar(state: any, data: boolean) {
       state.showPageLoadScrollBar = data
-    }
+    },
   },
   actions: {
     getUserData() {
       return new Promise(async (resolve) => {
-        const res:any = await getUserinfo()
+        const res: any = await getUserinfo()
         state.userInfo = res.body
         sessionStorage.setItem('user', JSON.stringify(res.body))
         resolve(res.body)
       })
-    }
+    },
   },
-  modules: {}
+  modules: {},
 })
 export default app

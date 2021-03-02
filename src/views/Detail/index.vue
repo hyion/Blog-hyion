@@ -2,7 +2,7 @@
   <div class="detail">
     <hy-header :title="temp.title" @like="onLike" :isLike="isLike" />
     <section class="header-con f-flex justify-start flex-column">
-      
+
       <div class="sub-title f-flex justify-start">
         <span v-if="temp.time">{{ temp.time.month.cn }}月 {{ temp.time.day.on }}, {{ temp.time.year }}</span>
         <span>阅读：{{temp.read}}</span>
@@ -23,10 +23,10 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { article, articleLike } from '/@/api/articles'
+import { article, articleLike } from '@/api/articles'
 import marked from 'marked'
 import { ElMessage } from 'element-plus'
-import { setStore, getStore } from '/@/utils/store'
+import { setStore, getStore } from '@/utils/store'
 
 interface IState {
   temp: {

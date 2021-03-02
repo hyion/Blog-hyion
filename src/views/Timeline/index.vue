@@ -1,6 +1,6 @@
 <template>
   <div class="timeline-wrapper">
-    <section class="timeline">
+    <!-- <section class="timeline">
       <div id="scene" class="layer">
         <div data-depth="0.4" >
           <img :src="imageUrl" class="move-img" :width="imgWidth" :height="imgHeight" >
@@ -14,7 +14,7 @@
         </div>
         <p class="content" v-if="userInfo && userInfo.cover">{{ userInfo.cover.describe }}</p>
       </div>
-    </section>
+    </section> -->
     <Articles />
     <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop> -->
   </div>
@@ -23,8 +23,8 @@
 <script lang="ts">
 import Parallax from 'parallax-js'
 import { defineComponent, onMounted, reactive, toRefs, computed } from 'vue'
-import { getUserinfo } from '/@/api/user'
-import MAIN_URL from '/@/assets/images/main.png'
+// import { getUserinfo } from '@/api/user'
+import MAIN_URL from '@/assets/images/main.png'
 import Articles from './List.vue'
 import { useStore } from 'vuex'
 import { IState } from './interface'
@@ -65,7 +65,7 @@ export default defineComponent({
     state.userInfo = JSON.parse(user)
 
     onMounted(() => {
-      initScene()
+      // initScene()
     })
 
     return {

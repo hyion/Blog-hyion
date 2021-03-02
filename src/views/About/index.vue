@@ -18,7 +18,7 @@
 <script lang="ts">
 import { toRefs, reactive, defineComponent, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { getMyself } from '/@/api/user'
+import { getMyself } from '@/api/user'
 import marked from 'marked'
 
 export default defineComponent({
@@ -101,7 +101,7 @@ export default defineComponent({
     animation: myMove 1.5s ease 1.5s alternate infinite;
   }
 
-  &::v-deep {
+  &::deep {
      .markdown-body {
       width: 100%;
       max-width: 800px;

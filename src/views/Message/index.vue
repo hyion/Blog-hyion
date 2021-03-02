@@ -15,14 +15,14 @@
 
 <script lang="ts">
 import { toRefs, reactive, defineComponent, onMounted } from 'vue'
-import { getMessage } from '/@/api/user'
+import { getMessage } from '@/api/user'
 
 export default defineComponent({
   setup() {
     const state = reactive({
       data: []
     })
-    
+
     const getData = async () => {
       const res: any = await getMessage()
       // console.log('getData--', res)
@@ -67,7 +67,7 @@ export default defineComponent({
       }
       .text {
         color: #333;
-        &::v-deep .hljs-right {
+        &::deep .hljs-right {
           text-align: right;
         }
       }

@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { articleList } from '/@/api/articles'
+import { articleList } from '@/api/articles'
 import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 // import { WOW } from 'wowjs'
 import { useRouter } from 'vue-router'
@@ -143,6 +143,7 @@ export default defineComponent({
         a {
           font-size: 24px;
           line-height: 30px;
+          font-weight: 700;
           cursor: pointer;
           color: #333;
           &:hover,

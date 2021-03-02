@@ -1,48 +1,55 @@
-  
-import path from 'path';
+import type { UserConfig } from 'vite'
+import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
 
-const pathResolve = (pathStr: string) => {
-  return path.resolve(__dirname, pathStr);
-};
+const pathResolve = (dir: string) => {
+  return resolve(__dirname, '.', dir)
+}
 
-module.exports = {
-  // hostname: '0.0.0.0',
+const alias: Record<string, string> = {
+  '@': pathResolve('src'),
+}
+
+const viteConfig = {
+  root: process.cwd(),
+  port: '9526',
   base: './',
-  port: 9526,
-  open: false, // 是否自动在浏览器打开
-  https: false, // 是否开启 https
-  ssr: false, // 服务端渲染
-  alias: {
-    '/@/': pathResolve('./src'),
-    '/@/views': pathResolve('./src/views'),
-    '/@/api': pathResolve('./src/api'),
-    '/@/components': pathResolve('./src/components'),
-    '/@/utils': pathResolve('./src/utils')
-  },
-  proxy: {
-    // '/lsbdb': 'http://10.192.195.96:3088/',
-    // string shorthand
-    // '/foo': 'http://localhost:4567/foo',
-    // // with options
-    '/api': {
-      target: 'http://localhost:3000/web/api',
-      changeOrigin: true,
-      rewrite: {
-        '^/api': '/'
-      },
-      // rewrite: path => path.replace(/^\/api/, '')
-    },
-    '/uploads': {
-      target: 'http://localhost:3000/',
-      changeOrigin: true,
-    },
-  },
-  optimizeDeps: {
-    include: ['axios']
-  },
+  open: false,
+  alias,
   cssPreprocessOptions: {
     sass: {
-      includePaths: ['path/to/sass/deps']
-    }
+      includePaths: ['path/to/sass/deps'],
+    },
   },
+
+  optimizeDeps: {
+    include: ['axios', '@kangc/v-md-editor/lib/theme/vuepress.js'],
+  },
+  server: {
+    proxy: {
+      // string shorthand
+      // '/foo': 'http://localhost:4567/foo',
+      // with options
+      '/api': {
+        target: 'http://localhost:3000/web/api/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+      '/uploads': {
+        target: 'http://localhost:3000',
+        ws: true,
+        changeOrigin: true
+      }
+      // with RegEx
+      // '^/fallback/.*': {
+      //   target: 'http://jsonplaceholder.typicode.com',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/fallback/, '')
+      // }
+    },
+  },
+  plugins: [vue()],
+  hmr: {overlay: false}
 }
+
+export default viteConfig
