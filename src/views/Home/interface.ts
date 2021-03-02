@@ -1,9 +1,10 @@
 export interface user {
-  avatar: string,
-  email: string,
+  avatar: string
+  email: string
   cover: any
+  name: string
 }
 export interface IState {
-  navgationData?: any[],
+  navgationData?: any[]
   userData?: user
 }

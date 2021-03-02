@@ -10,25 +10,22 @@ const alias: Record<string, string> = {
   '@': pathResolve('src'),
 }
 
-const viteConfig = {
+const viteConfig: UserConfig = {
   root: process.cwd(),
-  port: '9526',
   base: './',
-  open: false,
   alias,
-  cssPreprocessOptions: {
-    sass: {
-      includePaths: ['path/to/sass/deps'],
-    },
+  css: {
+    // sass: {
+    //   includePaths: ['path/to/sass/deps'],
+    // },
   },
 
   optimizeDeps: {
     include: ['axios', '@kangc/v-md-editor/lib/theme/vuepress.js'],
   },
   server: {
+    port: 9526,
     proxy: {
-      // string shorthand
-      // '/foo': 'http://localhost:4567/foo',
       // with options
       '/api': {
         target: 'http://localhost:3000/web/api/',
@@ -40,16 +37,10 @@ const viteConfig = {
         ws: true,
         changeOrigin: true
       }
-      // with RegEx
-      // '^/fallback/.*': {
-      //   target: 'http://jsonplaceholder.typicode.com',
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/fallback/, '')
-      // }
     },
+    hmr: { overlay: true }
   },
   plugins: [vue()],
-  hmr: {overlay: false}
 }
 
 export default viteConfig

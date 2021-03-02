@@ -2,7 +2,7 @@
   <div class="center-con f-flexjac">
     <div class="avatar-wrapper">
       <img class="avatar" v-if="userData" :src="userData.avatar" alt="avatar">
-      <h1>Hyion</h1>
+      <h1>{{ userData.name }}</h1>
     </div>
     <!-- <div class="wrapper">
       <div class="slash"></div>
@@ -61,7 +61,8 @@ export default defineComponent({
       userData: {
         avatar: '',
         email: '',
-        cover: null
+        cover: null,
+        name: '',
       }
     })
     const store = useStore()
@@ -231,8 +232,10 @@ export default defineComponent({
   .avatar-wrapper {
     text-align: center;
     h1 {
-      margin-top: 1px;
+      margin-top: 5px;
       color: #fff;
+      font-size: 20px;
+      font-weight: bold;
     }
     .avatar {
       width: 100px;

@@ -81,7 +81,8 @@ export default defineComponent({
   position: relative;
   width: 1100px;
   margin: 0 auto;
-  padding: 100px 0;
+  padding: 100px 20px;
+  background-color: #fff;
   &::after {
     content: "";
     left: 50%;
