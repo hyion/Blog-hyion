@@ -17,18 +17,25 @@
     </section> -->
     <header id="header">
       <div class="view">
-        <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt="">
-        <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt="">
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt=""> -->
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt=""> -->
+        <img :src="winter_view_1" class="morning" alt="">
+        <img :src="winter_view_2" class="afternoon" alt="">
         <video autoplay loop muted class="evening">
-          <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" />
+          <source :src="winter_view_3" type="video/webm">
+          <!-- <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" /> -->
         </video>
-        <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt="">
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt=""> -->
+        <img :src="winter_view_3_snow" class="window-cover" alt="">
       </div>
       
       <div class="tree">
-        <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt="">
-        <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt="">
-        <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt="">
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt=""> -->
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt=""> -->
+        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt=""> -->
+        <img :src="winter_tree_1" class="morning" alt="">
+        <img :src="winter_tree_2" class="afternoon" alt="">
+        <img :src="winter_tree_3" class="evening" alt="">
       </div>
     </header>
     <Articles />
@@ -37,19 +44,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, toRefs, computed } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 import MAIN_URL from '@/assets/images/main.png'
+import winter_view_1 from '@/assets/images/bilibili-winter-view-1.webp'
+import winter_view_2 from '@/assets/images/bilibili-winter-view-2.webp'
+import winter_view_3 from '@/assets/images/bilibili-winter-view-3.webm'
+import winter_view_3_snow from '@/assets/images/bilibili-winter-view-3-snow.png'
+import winter_tree_1 from '@/assets/images/bilibili-winter-tree-1.webp'
+import winter_tree_2 from '@/assets/images/bilibili-winter-tree-2.webp'
+import winter_tree_3 from '@/assets/images/bilibili-winter-tree-3.webp'
 import Articles from './List.vue'
 import { useStore } from 'vuex'
-import { IState } from './interface'
+// import { IState } from './interface'
 
 export default defineComponent({
   components: { Articles },
   setup() {
-    const state = reactive<IState>({
+    const state = reactive({
       imgWidth: 0,
       imgHeight: 0,
       imageUrl: MAIN_URL,
+      winter_view_1,
+      winter_view_2,
+      winter_view_3,
+      winter_view_3_snow,
+      winter_tree_1,
+      winter_tree_2,
+      winter_tree_3,
       date: {
         month: 0,
         day: 0,
