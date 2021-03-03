@@ -1,45 +1,23 @@
 <template>
   <div class="timeline-wrapper">
-    <!-- <section class="timeline">
-      <div id="scene" class="layer">
-        <div data-depth="0.4" >
-          <img :src="imageUrl" class="move-img" :width="imgWidth" :height="imgHeight" >
-        </div>
-      </div>
-      <div class="mask"></div>
-      <div class="info">
-        <div class="title f-flex align-center justify-center" v-if="userInfo">
-          <img class="avatar" v-if="userInfo" :src="userInfo.avatar" alt="avatar">
-          <span v-if="userInfo && userInfo.cover">{{ userInfo.cover.title }}</span>
-        </div>
-        <p class="content" v-if="userInfo && userInfo.cover">{{ userInfo.cover.describe }}</p>
-      </div>
-    </section> -->
-    <header id="header">
+    <header id="header" :style="styleObj">
       <div class="view">
-        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt=""> -->
-        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt=""> -->
         <img :src="winter_view_1" class="morning" alt="">
         <img :src="winter_view_2" class="afternoon" alt="">
         <video autoplay loop muted class="evening">
           <source :src="winter_view_3" type="video/webm">
-          <!-- <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" /> -->
         </video>
-        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt=""> -->
         <img :src="winter_view_3_snow" class="window-cover" alt="">
       </div>
       
       <div class="tree">
-        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt=""> -->
-        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt=""> -->
-        <!-- <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt=""> -->
         <img :src="winter_tree_1" class="morning" alt="">
         <img :src="winter_tree_2" class="afternoon" alt="">
         <img :src="winter_tree_3" class="evening" alt="">
       </div>
     </header>
     <Articles />
-    <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop> -->
+    <hy-to-top />
   </div>
 </template>
 
@@ -76,7 +54,11 @@ export default defineComponent({
         day: 0,
         year: 0
       },
-      userInfo: null
+      userInfo: null,
+      width: window.innerWidth,
+      styleObj: {
+        height: '130px'
+      }
     })
 
     const store = useStore()
@@ -86,6 +68,10 @@ export default defineComponent({
     state.userInfo = JSON.parse(user)
 
     onMounted(() => {
+      if (state.width > 1200) {
+        state.styleObj.height = `${parseInt(String(state.width / 13))}px` 
+      }
+      console.log(state.styleObj, state.width)
       let startingPoint: number
       const header = document.querySelector('#header') as HTMLElement
 
